@@ -1,0 +1,99 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+interface Props {
+    title: string;
+    description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead title={title} description={description} />
+    </head>
+    <body>
+        <Header />
+        <main class="legal-content">
+            <slot />
+        </main>
+        <Footer />
+    </body>
+</html>
+
+<style>
+    .legal-content {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 4rem 2rem;
+    }
+
+    .legal-content :global(h1) {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 800;
+        margin-bottom: 1rem;
+        color: rgb(var(--black));
+    }
+
+    .legal-content :global(.last-updated) {
+        color: rgb(var(--gray));
+        font-size: 0.95rem;
+        margin-bottom: 3rem;
+        font-style: italic;
+    }
+
+    .legal-content :global(h2) {
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin-top: 3rem;
+        margin-bottom: 1rem;
+        color: rgb(var(--black));
+    }
+
+    .legal-content :global(h3) {
+        font-size: 1.35rem;
+        font-weight: 600;
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+        color: rgb(var(--gray-dark));
+    }
+
+    .legal-content :global(p) {
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+        color: rgb(var(--gray-dark));
+    }
+
+    .legal-content :global(ul),
+    .legal-content :global(ol) {
+        margin-bottom: 1.5rem;
+        padding-left: 2rem;
+    }
+
+    .legal-content :global(li) {
+        line-height: 1.8;
+        margin-bottom: 0.75rem;
+        color: rgb(var(--gray-dark));
+    }
+
+    .legal-content :global(a) {
+        color: var(--discord-blurple);
+        text-decoration: underline;
+        transition: color 0.3s ease;
+    }
+
+    .legal-content :global(a:hover) {
+        color: var(--discord-blurple-dark);
+    }
+
+    @media (max-width: 768px) {
+        .legal-content {
+            padding: 3rem 1rem;
+        }
+    }
+</style>

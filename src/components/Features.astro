@@ -1,0 +1,170 @@
+---
+import { Card } from "./ui/card.tsx";
+
+const features = [
+  {
+    icon: "📊",
+    title: "Dashboard Management",
+    description:
+      "Intuitive web dashboard to configure and manage all bot features with ease. Real-time updates and beautiful UI.",
+  },
+  {
+    icon: "🎫",
+    title: "Ticket System",
+    description:
+      "Advanced support ticket system with customizable panels, categories, and automated workflows for efficient support.",
+  },
+  {
+    icon: "👋",
+    title: "Welcome Messages",
+    description:
+      "Greet new members with customizable welcome messages, embeds, and images. Make a great first impression.",
+  },
+  {
+    icon: "👥",
+    title: "Role Management",
+    description:
+      "Automated role assignment with reaction roles, self-roles, and advanced permission management systems.",
+  },
+  {
+    icon: "🛡️",
+    title: "Moderation Tools",
+    description:
+      "Comprehensive moderation suite with auto-mod, warnings, mutes, bans, and detailed logging capabilities.",
+  },
+  {
+    icon: "📈",
+    title: "Analytics & Insights",
+    description:
+      "Track server growth, member activity, and engagement metrics with beautiful charts and detailed reports.",
+  },
+];
+---
+
+<section class="features">
+  <div class="features-container">
+    <h2 class="features-title">Powerful Features</h2>
+    <p class="features-subtitle">
+      Everything you need to manage your Discord server efficiently
+    </p>
+
+    <div class="features-grid">
+      {
+        features.map((feature, index) => (
+          <Card
+            client:load
+            className="feature-card-wrapper"
+            style={{ animationDelay: `${index * 0.1}s` }}
+          >
+            <div class="feature-icon">{feature.icon}</div>
+            <h3 class="feature-title">{feature.title}</h3>
+            <p class="feature-description">{feature.description}</p>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .features {
+    padding: 6rem 2rem;
+    background: linear-gradient(180deg, #f8f9ff 0%, #ffffff 100%);
+    position: relative;
+  }
+
+  .features-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .features-title {
+    text-align: center;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: rgb(var(--black));
+    animation: fadeInUp 0.8s ease;
+  }
+
+  .features-subtitle {
+    text-align: center;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: rgb(var(--gray));
+    margin-bottom: 4rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeInUp 0.8s ease 0.2s backwards;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .feature-card-wrapper {
+    padding: 2.5rem !important;
+    border-radius: 1.5rem !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.8s ease 0.4s backwards;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07) !important;
+  }
+
+  .feature-card-wrapper:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(88, 101, 242, 0.2) !important;
+  }
+
+  .feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .feature-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: rgb(var(--black));
+  }
+
+  .feature-description {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgb(var(--gray));
+    margin: 0;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .features {
+      padding: 4rem 1rem;
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .feature-card-wrapper {
+      padding: 2rem !important;
+    }
+  }
+</style>
