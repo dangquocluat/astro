@@ -1,13 +1,13 @@
 ---
 import { DISCORD_INVITE_URL, DASHBOARD_URL } from "../consts";
-import { Button } from "./ui/button.tsx";
-import TextType from "./react/TextType";
-import LightRays from "./LightRays";
+import LightRays from "./ui/LightRays";
+import ShinyText from "./ShinyText";
 ---
 
 <section class="hero">
   <div class="hero-decoration">
     <LightRays
+      client:load
       raysOrigin="top-center"
       raysColor="#ffffff"
       raysSpeed={1}
@@ -23,20 +23,31 @@ import LightRays from "./LightRays";
       saturation={1}
     />
   </div>
+
   <div class="hero-content">
-    <div class="badge-container">
-      <span class="badge">✨ Powerful Discord Bot Management</span>
-    </div>
+    <span class="badge"
+      ><ShinyText
+        client:load
+        text="✨ Powerful Discord Bot Management"
+        speed={2}
+        delay={0}
+        color="#b5b5b5"
+        shineColor="#ffffff"
+        spread={120}
+        direction="left"
+        yoyo={false}
+        pauseOnHover={false}
+        disabled={true}
+      /></span
+    >
+
     <h1 class="hero-title">
       Manage Your Discord Server with <span class="gradient-text">Ease</span>
     </h1>
+
     <div class="hero-buttons">
-      <button class="hero-button">
-        <a href={DISCORD_INVITE_URL}>Add to Discord</a>
-      </button>
-      <button class="hero-button">
-        <a href={DASHBOARD_URL}>Open Dashboard</a>
-      </button>
+      <a class="hero-button" href={DISCORD_INVITE_URL}> Add to Discord </a>
+      <a class="hero-button" href={DASHBOARD_URL}> Open Dashboard </a>
     </div>
   </div>
 </section>
@@ -45,7 +56,6 @@ import LightRays from "./LightRays";
   .hero {
     position: relative;
     min-height: 100vh;
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -55,64 +65,47 @@ import LightRays from "./LightRays";
 
   .hero-decoration {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     z-index: 0;
   }
 
   .hero-content {
     position: relative;
-    z-index: 2;
+    z-index: 1;
     text-align: center;
     max-width: 900px;
-    margin: 0 auto;
     width: 100%;
-  }
-
-  .badge-container {
-    margin-bottom: 2rem;
-    animation: fadeInUp 0.8s ease forwards;
   }
 
   .badge {
     display: inline-block;
+    margin-bottom: 2rem;
     padding: 0.5rem 1.5rem;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 50px;
-    color: white;
+    border-radius: 999px;
     font-size: 0.875rem;
     font-weight: 500;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(10px);
+    animation: fadeInUp 0.8s ease forwards;
   }
 
   .hero-title {
+    margin-bottom: 1.5rem;
+    font-family: "Montserrat", sans-serif;
     font-size: clamp(2.5rem, 8vw, 5rem);
     font-weight: 900;
     line-height: 1.1;
-    margin-bottom: 1.5rem;
-    color: white;
-    animation: fadeInUp 0.8s ease 0.2s forwards;
+    color: #fff;
     opacity: 0;
+    animation: fadeInUp 0.8s ease 0.2s forwards;
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #667eea, #764ba2);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .hero-subtitle {
-    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-    line-height: 1.6;
-    margin-bottom: 2.5rem;
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 400;
-    animation: fadeInUp 0.8s ease 0.4s forwards;
-    opacity: 0;
   }
 
   .hero-buttons {
@@ -120,21 +113,28 @@ import LightRays from "./LightRays";
     gap: 1.5rem;
     justify-content: center;
     flex-wrap: wrap;
-    animation: fadeInUp 0.8s ease 0.6s forwards;
     opacity: 0;
+    animation: fadeInUp 0.8s ease 0.4s forwards;
   }
 
   .hero-button {
     padding: 1rem 2rem;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 50px;
-    color: white;
+    border-radius: 999px;
     font-size: 1rem;
     font-weight: 500;
+    color: #fff;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(10px);
-    transition: all 0.2s ease;
-    cursor: pointer;
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .hero-button:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.25);
   }
 
   @keyframes fadeInUp {
@@ -156,13 +156,11 @@ import LightRays from "./LightRays";
 
     .hero-buttons {
       flex-direction: column;
-      align-items: center;
     }
 
-    .hero-buttons :global(a) {
+    .hero-button {
       width: 100%;
       max-width: 300px;
-      text-align: center;
     }
   }
 </style>
